@@ -22,11 +22,10 @@ public class MergeSortImpl {
 
     public static void main(String[] args) {
         MergeSortImpl mergeSortImpl = new MergeSortImpl();
-        MergeSort<Integer> integerMergeSort = new MergeSort<>();
         Integer[] arr = mergeSortImpl.initInitArray(30);
         System.out.println("*** Before Sort ***");
         mergeSortImpl.printArray(arr);
-        integerMergeSort.sort(arr);
+        new MergeSortPractice(arr);
         System.out.println("\n\n*** After Sort ***");
         mergeSortImpl.printArray(arr);
     }
