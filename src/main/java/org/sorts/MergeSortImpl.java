@@ -22,7 +22,7 @@ public class MergeSortImpl {
 
     public static void main(String[] args) {
         MergeSortImpl mergeSortImpl = new MergeSortImpl();
-        Integer[] arr = mergeSortImpl.initInitArray(30);
+        Integer[] arr = mergeSortImpl.initInitArray(50);
         System.out.println("*** Before Sort ***");
         mergeSortImpl.printArray(arr);
         new MergeSortPractice(arr);

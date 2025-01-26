@@ -2,40 +2,39 @@ package org.sorts;
 
 public class MergeSortPractice {
 
-    public <T extends Comparable<T>> MergeSortPractice (T[] objectArray) {
-        mergeSort(objectArray);
+    public <T extends Comparable<T>> MergeSortPractice (T[] obj) {
+        sort (obj);
     }
 
-    private <T extends Comparable<T>> T[] mergeSort(T[] objArr) {
-        int len = objArr.length;
-        if (len < 2) return objArr;
+    private <T extends Comparable<T>> void sort(T[] obj) {
+        int len = obj.length;
+        if (len < 2) return;
 
         int midIndex = len / 2;
         T[] leftArr = (T[]) new Comparable[midIndex];
         T[] rightArr = (T[]) new Comparable[len - midIndex];
 
-        for (int i = 0; i < midIndex; i++) leftArr[i] = objArr[i];
-        for (int i = midIndex; i < len; i++) rightArr[i - midIndex] = objArr[i];
+        for (int i = 0; i < midIndex; i++) leftArr[i] = obj[i];
+        for (int j = midIndex; j < len; j++) rightArr[j - midIndex] = obj[j];
 
-        mergeSort(leftArr);
-        mergeSort(rightArr);
+        sort(leftArr);
+        sort(rightArr);
 
-        return merge(leftArr, rightArr, objArr);
+        mergeSort(leftArr, rightArr, obj);
     }
 
-    private <T extends Comparable<T>> T[] merge(T[] leftArr, T[] rightArr, T[] objArr) {
-        int leftIndex = 0, rightIndex = 0, objIndex = 0;
-        int leftSize = leftArr.length, rightSize = rightArr.length;
+    private <T extends Comparable<T>> void mergeSort(T[] leftArray, T[] rightArray, T[] objArray) {
+        int leftIndex, rightIndex,  objIndex;
+        leftIndex = rightIndex = objIndex = 0;
+        int leftSize = leftArray.length, rightSize = rightArray.length;
 
         while (leftIndex < leftSize && rightIndex < rightSize) {
-            if (leftArr[leftIndex].compareTo(rightArr[rightIndex]) <= 0)
-                objArr[objIndex++] = leftArr[leftIndex++];
-            else objArr[objIndex++] = rightArr[rightIndex++];
+            if (leftArray[leftIndex].compareTo(rightArray[rightIndex]) <= 0)
+                objArray[objIndex++] = leftArray[leftIndex++];
+            else objArray[objIndex++] = rightArray[rightIndex++];
         }
 
-        while (leftIndex < leftSize) objArr[objIndex++] = leftArr[leftIndex++];
-        while (rightIndex < rightSize) objArr[objIndex++] = rightArr[rightIndex++];
-
-        return objArr;
+        while (leftIndex < leftSize) objArray[objIndex++] = leftArray[leftIndex++];
+        while (rightIndex < rightSize) objArray[objIndex++] = rightArray[rightIndex++];
     }
 }
