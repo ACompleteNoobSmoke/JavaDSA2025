@@ -1,5 +1,10 @@
 package org.binarytrees;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 import org.Node;
 
 public class BinaryTree<T extends Comparable<T>> {
@@ -53,6 +58,16 @@ public class BinaryTree<T extends Comparable<T>> {
             case 2 -> postOrderTraversal(root);
             default -> inOrderTraversal(root);
         }
+    }
+
+    public void depthValues () {
+        if (isNull(root)) return;
+        depthFirstValues(root);
+    }
+
+    public void breadthValues() {
+        if (isNull(root)) return;
+        breadthFirstValues(root);
     }
 
     private void insertIntoTree(T data, Node<T> focusNode) {
@@ -111,6 +126,30 @@ public class BinaryTree<T extends Comparable<T>> {
             inOrderTraversal(focusNode.getLeft());
             System.out.println(focusNode);
             inOrderTraversal(focusNode.getRight());
+        }
+    }
+ 
+    private void depthFirstValues(Node<T> focusNode) {
+        if (focusNode == null) return;
+        Stack<Node<T>> stack = new Stack<>();
+        stack.push(focusNode);
+        while (!stack.isEmpty()) {
+            Node<T> current = stack.pop();
+            System.out.print(current.getData() + " ");
+            if (!isNull(current.getRight())) stack.push(current.getRight());
+            if (!isNull(current.getLeft())) stack.push(current.getLeft());
+        }
+    }
+
+    public void breadthFirstValues (Node<T> focusNode) {
+        if (isNull(focusNode)) return;
+        Queue<Node<T>> q = new LinkedList<>();
+        q.add(focusNode);
+        while (!q.isEmpty()) {
+            Node<T> current = q.poll();
+            System.out.print(current.getData() + " ");
+            if (!isNull(current.getLeft())) q.add(current.getLeft());
+            if (!isNull(current.getRight())) q.add(current.getRight());
         }
     }
 
